@@ -1,1 +1,4 @@
 # CQ7
+Running time: My solution has a for loops that runs n times, there a for loop within it that runs from where ever it is to 0, theres a constant amount of work to be done in that, which makes the running time O(n^2)
+The space complexity for this is the "total" integer, "j" "i", "jay", and "temp", i never make a copy of the input array, which means the space is constant O(1)
+Ice Cream: The way my algorithm works is that DP is the size of the array x the target sum x the amount of ice creams wanted. The base cases is the when target == 0 and when the amount of ice creams wanted also is 0. It figures out how many possible ways there are to sum up to the total by doing a take or dont take check, if take and dont take both work, then i take the max of the two and add 1. If only one works we take that integer and place it in the location. I use -1 to imply that this cannot be exactly summed down to 0. Because we need a perfect sum.
