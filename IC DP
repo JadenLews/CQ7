@@ -1,0 +1,51 @@
+public static Integer DP(int m, List<Integer> arr, int ICW){
+         int[][][] DP = new int[arr.size() + 1][m + 1][ICW + 1];
+         for (int IC = 0; IC < DP[0][0].length; IC++){
+             for (int targ = 0; targ < DP[0].length; targ++){
+                 for (int indi = 0; indi < DP.length; indi++){
+                     if (IC == 0 && targ == 0){
+                         DP[indi][targ][IC] = 1;
+                     }
+                     else{
+                         DP[indi][targ][IC] = -1;
+                     }
+                 }
+             }
+         }
+         for (int IC = 1; IC < DP[0][0].length; IC++){
+             for (int targ = 0; targ < DP[0].length; targ++){
+                 for (int indi = arr.size() - 1; indi >= 0; indi--){
+                     int take = -1;
+                     if (targ >= arr.get(indi)){
+                         take = DP[indi + 1][targ - arr.get(indi)][IC - 1];
+                     }
+                     int dont = DP[indi + 1][targ][IC];
+                     if (take != -1 && dont != -1){
+                         DP[indi][targ][IC] = Math.max(take, dont) + 1;
+                     }
+                     else if (dont != -1){
+                         DP[indi][targ][IC] = dont;
+                     }
+                     else if (take != -1){
+                         DP[indi][targ][IC] = take;
+                     }
+                     else{
+                         DP[indi][targ][IC] = -1;
+                     }
+                 }
+             }
+         }
+         //print
+         for (int IC = 0; IC < DP[0][0].length; IC++){
+             for (int targ = 0; targ < DP[0].length; targ++){
+                 for (int indi = 0; indi < DP.length; indi++){
+                     System.out.print(DP[indi][targ][IC] + " ");
+                 }
+                 System.out.println();
+             }
+                 System.out.println();
+                 System.out.println();
+             
+         }
+         return DP[0][m][ICW];
+     }
